@@ -1,30 +1,8 @@
-## Frontend Set Up
-1. make sure you are inside the frontend folder:
-```
-cd frontend
-```
+# React + Vite
 
-2. install the node module packages
-```
-npm install
-```
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-3. start running the application
-```
-npm run dev
-```
+Currently, two official plugins are available:
 
-
-
-## Step to setup a backend
-1. inside the terminal enter the following to download all the needed package:
-```
-npm install express
-npm install nodemon
-npm install pg
-```
-
-2. start the backend application by entering the following
-```
-npm start
-```
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
