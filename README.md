@@ -63,7 +63,17 @@ cd backend
 npm install
 ```
 
-3. start the backend application by entering the following
+3. Add an `.env` at the root level of the backend folder and enter the following
+```
+DB_USER=<user you are using>
+DB_HOST=localhost
+DB_NAME=<The database name you are using for your app>
+DB_PASSWORD=<your password for the user>
+DB_PORT=5432
+SESSION_SECRET=54abfd3bc273b747566b9cb56fa197a140af7bc0c17243c70e9037def0e061e2b220df928112d61302e44d4912006e644cfb82c1942ab1f20a1939fd7fc0e467
+```
+
+4. start the backend application by entering the following
 ```
 npm start
 ```
