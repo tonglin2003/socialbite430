@@ -1,0 +1,9 @@
+.img-login {
+  background-image: url("https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Ft4.ftcdn.net%2Fjpg%2F05%2F51%2F93%2F35%2F360_F_551933523_nBWNQeC6vA8sDE6DDDQeo3YmSRQnlOjN.jpg");
+  background-size: cover;
+  min-height: 100%;
+}
+
+.background-color {
+  background: rgba(192, 77, 62, 0.5);
+}

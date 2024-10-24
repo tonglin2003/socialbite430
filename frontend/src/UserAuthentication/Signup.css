@@ -1,0 +1,26 @@
+.img-signup {
+  background-image: url("https://media.istockphoto.com/id/1428737062/photo/empty-wooden-table-top-with-lights-bokeh-on-blur-restaurant-background.webp?b=1&s=170667a&w=0&k=20&c=bmQyPVwhLAB_FN9glJrREyPxzmIQPv5TOFcqcXHy2pw=");
+  background-size: cover;
+  min-height: 100%;
+}
+
+.img-signup .background-color {
+  background: rgb(255, 255, 255);
+  /* box-shadow: 10px 10px 4px; */
+}
+
+.auth-input-field {
+  /* Your existing styles here */
+  border-color: rgba(204, 204, 204, 1); 
+  transition: border-color, box-shadow 0.5s ease; 
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-input-field:focus {
+  box-shadow: inset 0 0 0 2.5px rgba(204, 127, 127, 0.6);
+  border-color: rgb(169, 82, 82) !important; 
+}
+
+.auth-input-field:hover{
+  border-color: rgb(169, 82, 82) !important; 
+}

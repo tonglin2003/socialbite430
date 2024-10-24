@@ -1,0 +1,84 @@
+.entire-page {
+  min-height: 100vh;
+}
+
+.headerBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 7vh;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  background-color: white;
+}
+
+.right {
+  display: flex;
+  height: 7vh;
+}
+
+.logo {
+  justify-self: flex-start;
+  padding: 10px;
+}
+
+.user-picture {
+  padding: 10px;
+  border-radius: 50%;
+  width: 50px;
+}
+
+.login {
+  color: white;
+  background-color: rgb(242, 90, 90);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 50%;
+  align-self: center;
+
+  border-radius: 5px;
+}
+
+.login:hover {
+  opacity: 0.7;
+}
+
+.logout {
+  color: white;
+  background-color: rgb(242, 90, 90);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 50%;
+  align-self: center;
+  margin-top: 0.8rem;
+  border-radius: 5px;
+}
+
+.logout:hover {
+  opacity: 0.7;
+}
+
+.nav-menu {
+  padding-top: 11px;
+}
+
+.nav-menu-list {
+  display: flex;
+}
+
+.nav-menu-item {
+  margin-right: 15px;
+  color: rgb(242, 90, 90);
+  font-weight: bold;
+}
+
+.nav-menu-item:hover {
+  text-decoration: underline;
+}
+
+/* Drop down menu code */
+.dropdown-list {
+  display: flex;
+  align-items: center;
+}
