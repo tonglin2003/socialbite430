@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-// import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 import {
   Outlet,
   Link,
@@ -17,38 +17,31 @@ import { HiLogout } from "react-icons/hi";
 import Search from "../Search/Search";
 
 export default function NavBar() {
-  // const { currentUser, logout } = useContext(AuthContext);
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const urlLastItem = location.pathname.split("/").pop();
+  const { currentUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const urlLastItem = location.pathname.split("/").pop();
   
-  // const handleLogout = (e) => {
-  //   e.preventDefault();
-  //   logout();
-  //   navigate("/login");
-  //   setTimeout(() => {
-  //     navigate("/login");
-  //     console.log("triggering redirect");
-  //   }, 0);
-  //   console.log(currentUser);
-  //   console.log("logging out!!");
-  // };
-
-  // // if the we are on login or signup, hide the navbar and footer
-  // if (urlLastItem === "login" || urlLastItem === "signup") {
-  //   return (
-  //     <>
-  //       <Outlet />
-  //     </>
-  //   );
-  // }
-
-  const currentUser = null ;
-
-  const testFunction = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
-    console.log("hello");
+    logout();
+    navigate("/login");
+    setTimeout(() => {
+      navigate("/login");
+      console.log("triggering redirect");
+    }, 0);
+    console.log(currentUser);
+    console.log("logging out!!");
   };
+
+  // if the we are on login or signup, hide the navbar and footer
+  if (urlLastItem === "login" || urlLastItem === "signup") {
+    return (
+      <>
+        <Outlet />
+      </>
+    );
+  }
 
 
   // for other pages, return the navbar and the footer
@@ -82,8 +75,7 @@ export default function NavBar() {
               </ul>
             </div>
             {currentUser ? (
-              // <Form method="post" onSubmit={handleLogout}>
-              <Form method="post" onSubmit={testFunction}>
+              <Form method="post" onSubmit={handleLogout}>
                 <button type="submit" className="logout mr-2">
                   Logout
                 </button>
@@ -164,15 +156,11 @@ export default function NavBar() {
                 </>
               )}
               <Dropdown.Divider />
-              {/* <Form
+              <Form
                 method="post"
                 onSubmit={handleLogout}
                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              > */}
-              <Form
-                method="post"
-                onSubmit={testFunction}
-                >
+              >
                 <button type="submit" className="flex flex-row gap-1">
                   {" "}
                   <HiLogout className="mt-1" />
