@@ -12,6 +12,7 @@ import AuthProvider from "./Contexts/AuthContext";
 // ----- home page components ----- ///
 import RestaurantDisplay from "./Home/HomePageSubSection/RestaurantDisplay";
 import RestaurantEventDisplay from "./Home/HomePageSubSection/RestaurantEventDisplay";
+import PostModal from "./Component/ModalWindow/ModalWindow"; 
 import {
   mainSectionRestaurantLoader,
 } from "./Loader/loadRestaurants";
@@ -32,7 +33,19 @@ const router = createBrowserRouter([
             path: "/",
             element: <RestaurantDisplay />,
             loader: mainSectionRestaurantLoader,
-          }
+          },
+          {
+            path: "/explore",
+            element: <RestaurantEventDisplay />,
+            loader: allEventsLoader,
+            children:
+            [
+              {
+                path: "/explore/:postId",
+                element: <PostModal/>
+              }
+            ]
+          },
         ],
       }
     ]

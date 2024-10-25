@@ -39,10 +39,16 @@ app.use(express.json());
 
 // import all routers from the router folder
 const authRouter = require("./routes/auth");
+const restaurantRouter = require("./routes/restaurant");
+const restauarantPostRouter = require("./routes/restaurantPost");
+
 
 
 // include the router inside the app of server.js
 app.use("/api/auth", authRouter);
+app.use("/api/restaurant", restaurantRouter);
+app.use("/api/restaurant_post", restauarantPostRouter);
+
 
 
 app.get('/', (req, res)=>{
