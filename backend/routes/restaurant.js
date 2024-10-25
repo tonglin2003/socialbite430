@@ -58,18 +58,6 @@ router.delete("/:restaurantId", async (req, res) => {
 // post a restauarant, require user login
 router.post("/", autheticateUser, async (req, res) => {
     try {
-        // Find the latitude and longitude of the restaurant based on the address given
-        console.log("fetching.......")
-        const latLng = await fetchRestaurantLatLng(req.body.address);
-        console.log("Finishing fetching")
-    
-        // Check if latLng is fetched successfully
-        if (!latLng) {
-          return res.status(400).json({
-            message: "Invalid address. Please enter a valid address.",
-          });
-        }
-
         // update the hasRestaurant section in the user table to true, to state they have a restaurant
         await User.update(
             { hasRestaurant: true }, // Data to update
@@ -81,8 +69,8 @@ router.post("/", autheticateUser, async (req, res) => {
           UserId: req.session.userId,
           restaurantName: req.body.restaurantName,
           address: req.body.address,
-          latitude: latLng.latitude,
-          longitude: latLng.longitude,
+          latitude: 0, // TODO: in the future development, the latitude and longitude would be generated based on the given address of the restaurant by Google Map API
+          longitude: 0,
           profileImage: req.body.profileImage,
           heroImage: req.body.heroImage,
         });

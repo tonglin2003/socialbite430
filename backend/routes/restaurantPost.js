@@ -25,6 +25,11 @@ router.get("/:restaurantId", async (req, res)=>{
         ],
         });
 
+        // if there are no posts under the restaurant
+        if (!posts || posts.length === 0) {
+            return res.status(404).json({ message: "No posts found for this restaurant." });
+          }
+
         // If all okay, return response of all posts
         return res.status(200).json(posts);
 
@@ -60,6 +65,11 @@ router.get("/post/:postId", async (req, res)=>{
         ],
         });
 
+        // If no post found, return 404
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+  
         // If all okay, return post
         return res.status(200).json(post);
 
