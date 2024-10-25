@@ -46,7 +46,7 @@ ALTER USER <your username> WITH PASSWORD 'your_password';
 CREATE DATABASE social_bite;
 ```
 
-# Steps to use Visual Studio to see the postgresql database
+### Steps to use Visual Studio to see the postgresql database
 1. Install PostgreSQL by Chris Kolkman inside visual studio
 2. After install, it will show up on your side bar with an icon of visual studio
 3. After click onto the icon, add a new database connection by clicking on the + button
@@ -63,7 +63,17 @@ cd backend
 npm install
 ```
 
-3. start the backend application by entering the following
+3. Add an `.env` at the root level of the backend folder and enter the following
+```
+DB_USER=<user you are using>
+DB_HOST=localhost
+DB_NAME=<The database name you are using for your app>
+DB_PASSWORD=<your password for the user>
+DB_PORT=5432
+SESSION_SECRET=54abfd3bc273b747566b9cb56fa197a140af7bc0c17243c70e9037def0e061e2b220df928112d61302e44d4912006e644cfb82c1942ab1f20a1939fd7fc0e467
+```
+
+4. start the backend application by entering the following
 ```
 npm start
 ```
@@ -76,4 +86,4 @@ After you finish all the steps above, you should see this.
         "janeDoe@gmail.com" and password of "password"
     - the sign up feature is also working
 
-![alt text](https://file%2B.vscode-resource.vscode-cdn.net/var/folders/rj/tmk97wjn4b32pg1nm4q3br180000gn/T/TemporaryItems/NSIRD_screencaptureui_ZJMFvk/Screenshot%202024-10-24%20at%205.12.40%E2%80%AFPM.png?version%3D1729804366378)
+<img width="1511" alt="Screenshot 2024-10-24 at 5 15 45 PM" src="https://github.com/user-attachments/assets/ed1919b5-0e1a-41f6-9355-c3cdeba43ec7">
