@@ -73,7 +73,19 @@ DB_PORT=5432
 SESSION_SECRET=54abfd3bc273b747566b9cb56fa197a140af7bc0c17243c70e9037def0e061e2b220df928112d61302e44d4912006e644cfb82c1942ab1f20a1939fd7fc0e467
 ```
 
-4. start the backend application by entering the following
+4. Start the sequelize services, first run the mitigration, then the seed. Enter the following:
+```
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
+
+note: if you need to undo the migration and seeder, use the following command
+```
+npx sequelize-cli db:migrate:undo:all
+npx sequelize-cli db:seed:undo:all
+```
+
+5. start the backend application by entering the following
 ```
 npm start
 ```
