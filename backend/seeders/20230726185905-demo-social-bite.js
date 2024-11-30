@@ -96,49 +96,49 @@ const tagId = tags[0][0].id;
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     },
     {
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     },
     {
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     },
     {
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     },
     {
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     },
     {
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     },
     {
       UserId: userId,
       RestaurantId: restaurantId,
       post_title: "25% OFF on All Menu Items!!",
-      post_content: "The promotion will be availiable from 07/12/23 to 07/25/23!!",
+      post_content: "The promotion will be availiable from 07/12/25 to 07/25/25!!",
       post_img: "https://i2.wp.com/greenpointers.com/app/uploads/2022/07/Screen-Shot-2022-07-25-at-10.10.31-PM-e1658846111596.png?fit=1200%2C1067&ssl=1"
     }
   ]);
