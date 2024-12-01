@@ -1,0 +1,50 @@
+.quote-container {
+  max-width: 900px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
+  margin: 30px 40px;
+}
+
+.quote-text {
+  font-size: 2.75rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.fas {
+  font-size: 4rem;
+}
+
+#author {
+  margin-top: 25px;
+  font-size: 1.5rem;
+  font-family: "Dosis", sans-serif;
+  font-style: italic;
+  text-align: right;
+}
+
+.review-title {
+  font-size: 2rem;
+  margin-top: 15px;
+  text-align: center;
+  font-family: "Dosis", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #777777;
+}
+
+.ranking {
+  display: flex;
+  margin: 15px 15px;
+}
+
+.review-ranking {
+  font-size: 2rem;
+  font-family: "Dosis", sans-serif;
+
+  color: #000;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
