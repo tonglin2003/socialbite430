@@ -25,9 +25,6 @@ const RestaurantEventDisplay = () => {
     setIsModalOpen(false);
   };
 
-console.log(data)
-
-
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 px-24 pb-24 gap-2">
   {columns.map((column, colIndex) => (
