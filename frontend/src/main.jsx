@@ -7,18 +7,14 @@ import Home from "./Home/Home";
 import Login from "./UserAuthentication/Login";
 import Signup from "./UserAuthentication/Signup";
 import AuthProvider from "./Contexts/AuthContext";
-
+import FAQ from "./FAQ/FAQ";
 
 // ----- home page components ----- ///
 import RestaurantDisplay from "./Home/HomePageSubSection/RestaurantDisplay";
 import RestaurantEventDisplay from "./Home/HomePageSubSection/RestaurantEventDisplay";
-import PostModal from "./Component/ModalWindow/ModalWindow"; 
-import {
-  mainSectionRestaurantLoader,
-} from "./Loader/loadRestaurants";
-import {
-  allEventsLoader
-} from "./Loader/loadRestaurantPosts";
+import PostModal from "./Component/ModalWindow/ModalWindow";
+import { mainSectionRestaurantLoader } from "./Loader/loadRestaurants";
+import { allEventsLoader } from "./Loader/loadRestaurantPosts";
 
 const router = createBrowserRouter([
   {
@@ -38,17 +34,16 @@ const router = createBrowserRouter([
             path: "/explore",
             element: <RestaurantEventDisplay />,
             loader: allEventsLoader,
-            children:
-            [
+            children: [
               {
                 path: "/explore/:postId",
-                element: <PostModal/>
-              }
-            ]
+                element: <PostModal />,
+              },
+            ],
           },
         ],
-      }
-    ]
+      },
+    ],
   },
   {
     path: "/login",
@@ -57,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/faq",
+    element: <FAQ />,
   },
 ]);
 
