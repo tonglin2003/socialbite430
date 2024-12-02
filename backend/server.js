@@ -41,6 +41,10 @@ app.use(express.json());
 const authRouter = require("./routes/auth");
 const restaurantRouter = require("./routes/restaurant");
 const restauarantPostRouter = require("./routes/restaurantPost");
+const userRouter = require("./routes/user");
+const reviewRouter = require("./routes/userRate");
+
+
 
 
 
@@ -48,6 +52,10 @@ const restauarantPostRouter = require("./routes/restaurantPost");
 app.use("/api/auth", authRouter);
 app.use("/api/restaurant", restaurantRouter);
 app.use("/api/restaurant_post", restauarantPostRouter);
+app.use("/api/user", userRouter);
+app.use("/api/review", reviewRouter);
+
+
 
 
 

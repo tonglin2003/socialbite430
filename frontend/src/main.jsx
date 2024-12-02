@@ -7,8 +7,6 @@ import Home from "./Home/Home";
 import Login from "./UserAuthentication/Login";
 import Signup from "./UserAuthentication/Signup";
 import AuthProvider from "./Contexts/AuthContext";
-import FAQ from "./FAQ/FAQ";
-import AboutApp from "./AboutApp/AboutApp";
 
 // ----- home page components ----- ///
 import RestaurantDisplay from "./Home/HomePageSubSection/RestaurantDisplay";
@@ -30,6 +28,15 @@ const router = createBrowserRouter([
             path: "/",
             element: <RestaurantDisplay />,
             loader: mainSectionRestaurantLoader,
+          },
+          {
+            path: "/nearby_restaurants",
+            element: (
+              <ShareLocationRequired>
+                <RestaurantDisplay />
+              </ShareLocationRequired>
+            ),
+            loader: nearbyRestaurantLoader,
           },
           {
             path: "/explore",

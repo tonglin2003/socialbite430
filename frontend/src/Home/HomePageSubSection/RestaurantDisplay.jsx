@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom/dist/umd/react-router-dom.development';
+import { useLoaderData, useLocation } from 'react-router-dom/dist/umd/react-router-dom.development';
 import "../HomeStyle.css";
 
 const RestaurantDisplay = () => {
@@ -16,6 +16,8 @@ const RestaurantDisplay = () => {
     color: 'gold',
   };
 
+  const location = useLocation()
+  const urlLastItem = location.pathname.split('/').pop();
 
   return (
     <>
@@ -24,8 +26,8 @@ const RestaurantDisplay = () => {
         data.map((restaurant, index) => {
           return (
             <Link to={`/restaurant/${restaurant.id}`} className="card" key={index}>
-              <img className="cardImage" src={restaurant.heroImage} alt={"Img"} />
-              <div className="cardName flex justify-center m-3">{restaurant.restaurantName}</div>
+              <img className="cardImage" src={(urlLastItem==="nearby_restaurants")? restaurant.hero_image : restaurant.heroImage} alt={"Img"} />
+              <div className="cardName flex justify-center m-3">{(urlLastItem==="nearby_restaurants")? restaurant.restaurant_name : restaurant.restaurantName}</div>
               <div className="cardType">{restaurant.foodType}</div>
               <div className="rateAndButton">
                 <span className="cardRate">
@@ -42,5 +44,5 @@ const RestaurantDisplay = () => {
     </>
   );
 };
-
 export default RestaurantDisplay;
+

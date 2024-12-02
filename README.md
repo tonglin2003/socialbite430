@@ -53,6 +53,18 @@ ALTER USER <your username> WITH PASSWORD 'your_password';
 CREATE DATABASE social_bite;
 ```
 
+6. Connect to the datbase through entering these in the terminal
+```
+psql -U <username> -d <database>
+
+```
+
+7. Install the following postgresql extension
+```
+CREATE EXTENSION IF NOT EXISTS cube;
+CREATE EXTENSION IF NOT EXISTS earthdistance;
+```
+
 ### Steps to use Visual Studio to see the postgresql database
 
 1. Install PostgreSQL by Chris Kolkman inside visual studio

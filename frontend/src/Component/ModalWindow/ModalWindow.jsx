@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useNavigate} from 'react-router-dom/dist/umd/react-router-dom.development';
-
+import PostComment from "../ModalWindow/CommentButton/CommentButton";
 
 const PostModal = () => {
   const { postId } = useParams();
@@ -37,9 +37,9 @@ const PostModal = () => {
       <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-gray-900 z-50 overflow-y-scroll">
         <div
           key={`${post.id}`}
-          className="flex flex-col mt-8 my-10 max-h-full overflow-y-auto bg-white"
+          className="flex flex-col mt-8 my-10 max-h-full overflow-y-auto"
         >
-          <div className="post-card post-card-shadow">
+          <div className="post-card post-card-shadow bg-white">
             <div className="post-creator m-5 flex items-center justify-between">
 
               <Link className='flex flex-row' to={`/restaurant/${post.Restaurant.id}`}>
@@ -75,6 +75,9 @@ const PostModal = () => {
 
                 <div className="line" style={{ marginTop: "2rem" }}></div>
 
+                <div className="flex flex-row mt-6 mb-3">
+                  <PostComment postId={parseInt(post.id, 10)} navigate={navigate} />
+                </div>
               </div>
             </div>
           </div>
