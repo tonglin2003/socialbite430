@@ -8,6 +8,7 @@ import Login from "./UserAuthentication/Login";
 import Signup from "./UserAuthentication/Signup";
 import AuthProvider from "./Contexts/AuthContext";
 import FAQ from "./FAQ/FAQ";
+import AboutApp from "./AboutApp/AboutApp";
 
 // ----- home page components ----- ///
 import RestaurantDisplay from "./Home/HomePageSubSection/RestaurantDisplay";
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/faq",
     element: <FAQ />,
+  },
+  {
+    path: "/aboutapp",
+    element: <AboutApp />,
   },
 ]);
 
