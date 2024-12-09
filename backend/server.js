@@ -43,6 +43,7 @@ const restaurantRouter = require("./routes/restaurant");
 const restauarantPostRouter = require("./routes/restaurantPost");
 const userRouter = require("./routes/user");
 const reviewRouter = require("./routes/userRate");
+const tagRouter = require("./routes/tag");
 
 
 
@@ -54,6 +55,7 @@ app.use("/api/restaurant", restaurantRouter);
 app.use("/api/restaurant_post", restauarantPostRouter);
 app.use("/api/user", userRouter);
 app.use("/api/review", reviewRouter);
+app.use("/api/tag", tagRouter);
 
 
 
