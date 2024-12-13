@@ -37,6 +37,57 @@ router.post("/:postId/like", autheticateUser, async (req, res) => {
     }
 });
 
+//remove a like from a post by Id
+router.delete("/:postId/unlike", autheticateUser, async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+    const userId = parseInt(req.session.userId, 10); // Get the user ID from the session
+  
+    try {
+      // Check if the like exists
+      const like = await PostLike.findOne({
+        where: { UserId: userId, PostId: postId },
+      });
+  
+      if (!like) {
+        return res.status(404).json({ message: "Like not found for this post." });
+      }
+  
+      // Remove the like
+      await like.destroy();
+      return res.status(200).json({ message: "Like removed successfully." });
+    } catch (error) {
+      return res.status(500).json({
+        message: "An error occurred while removing the like.",
+        error: error.message,
+      });
+    }
+  });
+
+  //get number of likes by post id
+  router.get("/:postId/likes/count", async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+  
+    try {
+      // Check if the post exists
+      const post = await Post.findByPk(postId);
+      if (!post) {
+        return res.status(404).json({ message: "Post not found." });
+      }
+  
+      // Count the number of likes for the post
+      const likeCount = await PostLike.count({
+        where: { PostId: postId },
+      });
+  
+      return res.status(200).json({ postId, likeCount });
+    } catch (error) {
+      return res.status(500).json({
+        message: "An error occurred while counting likes for the post.",
+        error: error.message,
+      });
+    }
+  });
+
 
 // Get all posts of a restaurant in the db based on their restaurantId
 router.get("/:restaurantId", async (req, res)=>{
