@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Tag, { through: models.UserTag, foreignKey: "UserId" });
       this.hasMany(models.Restaurant, {foreignKey: "UserId"});
       this.hasMany(models.Comment, {foreignKey: "UserId"});
+      this.hasMany(models.PostLike, { foreignKey: 'UserId' });
+      this.hasMany(models.RestaurantFollow, { foreignKey: 'UserId' });
+
     }
   }
   User.init({

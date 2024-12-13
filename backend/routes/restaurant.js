@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Restaurant, User } = require("../models");
+const { Restaurant, User, RestaurantFollow } = require("../models");
 const { autheticateUser } = require("../middleware/authUser");
 require("dotenv").config();
 const { Op } = require("sequelize");
@@ -8,6 +8,40 @@ const { Op } = require("sequelize");
 // import axios from the axios to fetch for google map api
 const axios = require("axios");
 const googleApiKey = process.env.GOOGLE_API_KEY;
+
+
+// Add a follower to a restaurant
+router.post("/:restaurantId/follow", autheticateUser, async (req, res) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  const userId = parseInt(req.session.userId, 10);
+
+  try {
+    // Check if the restaurant exists
+    const restaurant = await Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+
+    // Check if the user is already following the restaurant
+    const existingFollow = await RestaurantFollow.findOne({
+      where: {
+        UserId: userId,
+        RestaurantId: restaurantId,
+      },
+    });
+
+    if (existingFollow) {
+      return res.status(400).json({ message: "You are already following this restaurant." });
+    }
+
+    // Create the follow
+    await RestaurantFollow.create({ UserId: userId, RestaurantId: restaurantId });
+    return res.status(201).json({ message: "Restaurant followed successfully." });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred while following the restaurant.", error: error.message });
+  }
+});
+
 
 // fetch to google map api for the address's lat and lng by axios
 async function fetchRestaurantLatLng(address) {

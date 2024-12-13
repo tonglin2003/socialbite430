@@ -1,9 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const { Restaurant, Post, Comment, sequelize, UserTag, Tag, PostTag, User} = require("../models");
+const { Restaurant, Post, Comment, sequelize, UserTag, Tag, PostTag, User, PostLike} = require("../models");
 const { autheticateUser } = require("../middleware/authUser");
 const {userAllowPosition} = require("../middleware/userAllowPosition");
 const { Op,QueryTypes } = require("sequelize");
+
+// Add a like to a post
+router.post("/:postId/like", autheticateUser, async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+    const userId = parseInt(req.session.userId, 10);
+  
+    try {
+      // Check if the post exists
+      const post = await Post.findByPk(postId);
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+  
+      // Check if the user already liked the post
+      const existingLike = await PostLike.findOne({
+        where: {
+          UserId: userId,
+          PostId: postId,
+        },
+      });
+  
+      if (existingLike) {
+        return res.status(400).json({ message: "You have already liked this post." });
+      }
+  
+      //Create the like
+      await PostLike.create({ UserId: userId, PostId: postId });
+      return res.status(201).json({ message: "Post liked successfully." });
+    } catch (error) {
+      return res.status(500).json({ message: "An error occurred while liking the post.", error: error.message });
+    }
+});
 
 
 // Get all posts of a restaurant in the db based on their restaurantId

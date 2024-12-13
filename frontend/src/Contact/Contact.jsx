@@ -116,6 +116,8 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
+
           <div className="profile-card">
             <div className="img">
               <img src={vitali} />
@@ -142,6 +144,10 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
+
+
+
         </div>
       </div>
     </>
