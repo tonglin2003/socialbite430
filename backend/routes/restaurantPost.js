@@ -88,6 +88,31 @@ router.delete("/:postId/unlike", autheticateUser, async (req, res) => {
     }
   });
 
+  //Get All Posts Liked by a User
+  router.get("/likes", autheticateUser, async (req, res) => {
+    const userId = parseInt(req.session.userId, 10); // Get user ID from session
+  
+    try {
+      // Find all posts liked by the user
+      const likedPosts = await PostLike.findAll({
+        where: { UserId: userId },
+        include: [
+          {
+            model: Post,
+          },
+        ],
+      });
+  
+      return res.status(200).json({ likedPosts });
+    } catch (error) {
+      return res.status(500).json({
+        message: "An error occurred while fetching liked posts.",
+        error: error.message,
+      });
+    }
+  });
+  
+  
 
 // Get all posts of a restaurant in the db based on their restaurantId
 router.get("/:restaurantId", async (req, res)=>{

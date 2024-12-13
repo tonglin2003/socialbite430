@@ -9,7 +9,6 @@ const { Op } = require("sequelize");
 const axios = require("axios");
 const googleApiKey = process.env.GOOGLE_API_KEY;
 
-
 // Add a follower to a restaurant
 router.post("/:restaurantId/follow", autheticateUser, async (req, res) => {
   const restaurantId = parseInt(req.params.restaurantId, 10);
@@ -91,9 +90,33 @@ router.get("/:restaurantId/follows/count", async (req, res) => {
       message: "An error occurred while counting followers for the restaurant.",
       error: error.message,
     });
+  }})
+
+//get all of a users followed restaurants by user Id
+router.get("/follows", autheticateUser, async (req, res) => {
+  const userId = parseInt(req.session.userId, 10); // Get user ID from session
+
+  try {
+    // Find all restaurants followed by the user
+    const followedRestaurants = await RestaurantFollow.findAll({
+      where: { UserId: userId },
+      include: [
+        {
+          model: Restaurant,
+        },
+      ],
+    });
+
+    return res.status(200).json({ followedRestaurants });
+  } catch (error) {
+    return res.status(500).json({
+      message: "An error occurred while fetching followed restaurants.",
+      error: error.message,
+    });
   }
-}
-)
+});
+
+
 
 
 // fetch to google map api for the address's lat and lng by axios
