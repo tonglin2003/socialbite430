@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PostLike.init({
-    Uid: {
+    UserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'PostLike',
     tableName: 'post_likes',
-    underscored: true,
+    timestamps: false, // Ensure timestamps are enabled
   });
   return PostLike;
 };

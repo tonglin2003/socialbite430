@@ -29,13 +29,13 @@ router.post("/:postId/like", autheticateUser, async (req, res) => {
         return res.status(400).json({ message: "You have already liked this post." });
       }
   
-      // Create the like
+      //Create the like
       await PostLike.create({ UserId: userId, PostId: postId });
       return res.status(201).json({ message: "Post liked successfully." });
     } catch (error) {
       return res.status(500).json({ message: "An error occurred while liking the post.", error: error.message });
     }
-  });
+});
 
 
 // Get all posts of a restaurant in the db based on their restaurantId

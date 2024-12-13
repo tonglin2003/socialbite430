@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'RestaurantFollow',
     tableName: 'restaurant_follows',
-    underscored: true,
+    timestamps: false, // Ensure timestamps are enabled
   });
   return RestaurantFollow;
 };
