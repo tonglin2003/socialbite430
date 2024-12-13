@@ -5,7 +5,7 @@ import vitali from "./vitali.jpg";
 import Rodaina from "./rodaina.jpg";
 import tong from "./tong.jpg";
 import William from "./William.jpeg";
-import Jay from "./Jay.jpg"
+import Jay from "./Jay.jpeg";
 
 export default function Contact() {
   return (
@@ -30,6 +30,32 @@ export default function Contact() {
 
                 <a
                   href="https://github.com/WenxuanChen1"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FaGithubSquare />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="profile-card">
+            <div className="img">
+              <img src={Jay} />
+            </div>
+            <div className="caption">
+              <h3>Jay Chen</h3>
+              <p>Backend developer</p>
+              <div className="social-links">
+                <a
+                  href="https://www.linkedin.com/in/jaychen09/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FaLinkedin />
+                </a>
+
+                <a
+                  href="https://github.com/jmyoi"
                   target="_blank"
                   rel="noreferrer"
                 >
