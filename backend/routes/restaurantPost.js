@@ -99,6 +99,11 @@ router.delete("/:postId/unlike", autheticateUser, async (req, res) => {
         include: [
           {
             model: Post,
+            include: [
+                {
+                  model: Restaurant,
+                },
+              ],
           },
         ],
       });
