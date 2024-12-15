@@ -1,0 +1,132 @@
+.faq-body {
+  background: #f5f8ff;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.faq-container {
+  margin: 0 40px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-container h1 {
+  color: #333;
+  font-size: 48px;
+  text-align: center;
+}
+
+.faq-container .tab {
+  position: relative;
+  background: #fff;
+  padding: 20px 20px 20px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.faq-container .tab input {
+  /* appearance: none; */
+  /* fix above */
+  display: none;
+  /* position: fixed;
+  opacity: 0;
+  pointer-events: none; */
+}
+
+.faq-container .tab label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-container .tab label::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  font-size: 2rem;
+  color: rgba(0, 0, 0, 0.1);
+  transition: transform 1s;
+}
+
+.faq-container .tab:hover label::after {
+  color: #333;
+}
+
+.faq-container .tab input:checked ~ label::after {
+  transform: rotate(135deg);
+  color: #fff;
+}
+
+.faq-container .tab label h2 {
+  width: 40px;
+  height: 40px;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  /* font-size: 1.25em; */
+  font-weight: bold;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.faq-container .tab input:checked ~ label h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 8em;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.faq-container .tab:nth-child(2) label h2 {
+  background: linear-gradient(135deg, #70f570, #49c628);
+}
+
+.faq-container .tab:nth-child(3) label h2 {
+  background: linear-gradient(135deg, #3c8ce7, #00eaff);
+}
+
+.faq-container .tab:nth-child(4) label h2 {
+  background: linear-gradient(135deg, #ff96f9, #c32bac);
+}
+
+.faq-container .tab:nth-child(5) label h2 {
+  background: linear-gradient(135deg, #fd6e6a, #ffc600);
+}
+
+.faq-container .tab label h3 {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  z-index: 10;
+}
+
+.faq-container .tab .content {
+  max-height: 0;
+  transition: 1s;
+  overflow: hidden;
+}
+
+.faq-container .tab input:checked ~ .content {
+  max-height: 100vh;
+}
+
+.faq-container .tab .content p {
+  position: relative;
+  padding: 10px 0;
+  color: #333;
+  z-index: 10;
+}

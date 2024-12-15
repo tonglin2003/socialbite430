@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Tag, { through: models.PostTag, foreignKey: 'TagId' });
       // one to many relationship with comment
       this.hasMany(models.Comment, {foreignKey: "PostId"});
+      // many to many relationship with postLikes
+      this.hasMany(models.PostLike, { foreignKey: 'PostId' });
 
     }
   }
