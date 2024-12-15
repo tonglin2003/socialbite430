@@ -1,10 +1,123 @@
 const express = require("express");
 const router = express.Router();
-const { Restaurant, Post, Comment, sequelize, Tag, User} = require("../models");
+const { Restaurant, Post, Comment, sequelize, UserTag, Tag, PostTag, User, PostLike} = require("../models");
 const { autheticateUser } = require("../middleware/authUser");
 const {userAllowPosition} = require("../middleware/userAllowPosition");
 const { Op,QueryTypes } = require("sequelize");
 
+// Add a like to a post
+router.post("/:postId/like", autheticateUser, async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+    const userId = parseInt(req.session.userId, 10);
+  
+    try {
+      // Check if the post exists
+      const post = await Post.findByPk(postId);
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+  
+      // Check if the user already liked the post
+      const existingLike = await PostLike.findOne({
+        where: {
+          UserId: userId,
+          PostId: postId,
+        },
+      });
+  
+      if (existingLike) {
+        return res.status(400).json({ message: "You have already liked this post." });
+      }
+  
+      //Create the like
+      await PostLike.create({ UserId: userId, PostId: postId });
+      return res.status(201).json({ message: "Post liked successfully." });
+    } catch (error) {
+      return res.status(500).json({ message: "An error occurred while liking the post.", error: error.message });
+    }
+});
+
+//remove a like from a post by Id
+router.delete("/:postId/unlike", autheticateUser, async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+    const userId = parseInt(req.session.userId, 10); // Get the user ID from the session
+  
+    try {
+      // Check if the like exists
+      const like = await PostLike.findOne({
+        where: { UserId: userId, PostId: postId },
+      });
+  
+      if (!like) {
+        return res.status(404).json({ message: "Like not found for this post." });
+      }
+  
+      // Remove the like
+      await like.destroy();
+      return res.status(200).json({ message: "Like removed successfully." });
+    } catch (error) {
+      return res.status(500).json({
+        message: "An error occurred while removing the like.",
+        error: error.message,
+      });
+    }
+  });
+
+  //get number of likes by post id
+  router.get("/:postId/likes/count", async (req, res) => {
+    const postId = parseInt(req.params.postId, 10);
+  
+    try {
+      // Check if the post exists
+      const post = await Post.findByPk(postId);
+      if (!post) {
+        return res.status(404).json({ message: "Post not found." });
+      }
+  
+      // Count the number of likes for the post
+      const likeCount = await PostLike.count({
+        where: { PostId: postId },
+      });
+  
+      return res.status(200).json({ postId, likeCount });
+    } catch (error) {
+      return res.status(500).json({
+        message: "An error occurred while counting likes for the post.",
+        error: error.message,
+      });
+    }
+  });
+
+  //Get All Posts Liked by a User
+  router.get("/likes", autheticateUser, async (req, res) => {
+    const userId = parseInt(req.session.userId, 10); // Get user ID from session
+  
+    try {
+      // Find all posts liked by the user
+      const likedPosts = await PostLike.findAll({
+        where: { UserId: userId },
+        include: [
+          {
+            model: Post,
+            include: [
+                {
+                  model: Restaurant,
+                },
+              ],
+          },
+        ],
+      });
+  
+      return res.status(200).json({ likedPosts });
+    } catch (error) {
+      return res.status(500).json({
+        message: "An error occurred while fetching liked posts.",
+        error: error.message,
+      });
+    }
+  });
+  
+  
 
 // Get all posts of a restaurant in the db based on their restaurantId
 router.get("/:restaurantId", async (req, res)=>{
@@ -240,6 +353,61 @@ router.get("/:postId/comment", async(req, res)=>{
     }
 });
 
+// get all post that are associated with user's interest
+router.get("/user/interested_post", autheticateUser,async (req, res) => {
+    try {
+        // Get all user's interested tags
+        const userInterestedTags = await UserTag.findAll({ where: { UserId: parseInt(req.session.userId,10) } });
+        const userInterestedTagId = userInterestedTags.map((element) => { return element.TagId });
+
+        // If not interested in any tag, return 404
+        if (userInterestedTagId.length === 0) {
+            return res.status(404).json({ message: "No Tags Interested" });
+        }
+
+        // Look for Post that user is interested in based on the userInterestedTags
+        const userInterestedPosts = await PostTag.findAll({
+            where: {
+                TagId: {
+                    [Op.in]: userInterestedTagId
+                }
+            },
+            include: 
+            [{
+                model: User,
+                attributes: ["username"]
+            },
+            {
+                model: Restaurant,
+                attributes: ["restaurantName", "profileImage", "id"]
+            }
+        ],
+        });
+        const userInterestedPostsId = userInterestedPosts.map((element) => { return element.PostId });
+
+        // Use the PostId to find the posts inside the "post" table along with their associated tags
+        const posts = await Post.findAll({
+            where: {
+                id: {
+                    [Op.in]: userInterestedPostsId
+                }
+            },
+            include: {
+                model: Restaurant,
+                attributes: ["restaurantName", "profileImage", "id"],
+              }
+        });
+
+        if (posts.length === 0) {
+            return res.status(404).json({ message: "No Posts Interested" });
+        } else {
+            return res.status(200).json(posts);
+        }
+    } catch (error) {
+        return res.status(500).json({ message: "An error occurred when fetching for restaurants", error: error.stack, errorMessage: error.message });
+    }
+});
+
 // get all post nearby restaurant post, if user allowed share location
 router.get("/user/nearby_post/:radiusKm", userAllowPosition, async(req,res)=>{
     // get the list of restaurant near the user, and allow user to choose the radiusKm
@@ -291,6 +459,60 @@ router.get("/user/nearby_post/:radiusKm", userAllowPosition, async(req,res)=>{
         return res.status(500).json({message: "An error occured when fetching for restaurants", error: errorMessage, errorStack: error.stack});
     }
 
+});
+
+// post a new tag onto a post
+router.post("/editTag/:postId/:tagId", autheticateUser, async(req,res)=>{
+    try {
+        const postId = parseInt(req.params.postId, 10);
+        const tagId = parseInt(req.params.tagId, 10);
+        const userId = parseInt(req.session.userId, 10);
+    
+        // Check if the post with the given postId exists and if the authenticated user has the right to edit the post
+        const post = await Post.findOne({
+          where: {
+            id: postId,
+            UserId: userId,
+          },
+        });
+    
+        if (!post) {
+          return res.status(404).json({ message: "Post not found or you are not authorized to edit this post." });
+        }
+    
+        // Check if the tag with the given tagId exists
+        const tag = await Tag.findOne({
+          where: {
+            id: tagId,
+          },
+        });
+    
+        if (!tag) {
+          return res.status(404).json({ message: "Tag not found." });
+        }
+    
+        // Check if the tag is already associated with the post
+        const existingPostTag = await PostTag.findOne({
+          where: {
+            PostId: postId,
+            TagId: tagId,
+          },
+        });
+    
+        if (existingPostTag) {
+          return res.status(400).json({ message: "Tag is already associated with the post." });
+        }
+    
+        // Add the association between the post and the tag in the post_tag table
+        await PostTag.create({
+          PostId: postId,
+          TagId: tagId,
+        });
+    
+        return res.status(200).json({ message: "Tag added to the post successfully." });
+      } catch (error) {
+        return res.status(500).json({ message: "An error occurred while adding the tag to the post.", error: error.message });
+      }
 });
 
 // delete a post, will check if user is the owner of the post

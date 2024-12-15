@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Restaurant, User } = require("../models");
+const { Restaurant, User, RestaurantFollow } = require("../models");
 const { autheticateUser } = require("../middleware/authUser");
 require("dotenv").config();
 const { Op } = require("sequelize");
@@ -8,6 +8,116 @@ const { Op } = require("sequelize");
 // import axios from the axios to fetch for google map api
 const axios = require("axios");
 const googleApiKey = process.env.GOOGLE_API_KEY;
+
+// Add a follower to a restaurant
+router.post("/:restaurantId/follow", autheticateUser, async (req, res) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  const userId = parseInt(req.session.userId, 10);
+
+  try {
+    // Check if the restaurant exists
+    const restaurant = await Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+
+    // Check if the user is already following the restaurant
+    const existingFollow = await RestaurantFollow.findOne({
+      where: {
+        UserId: userId,
+        RestaurantId: restaurantId,
+      },
+    });
+
+    if (existingFollow) {
+      return res.status(400).json({ message: "You are already following this restaurant." });
+    }
+
+    // Create the follow
+    await RestaurantFollow.create({ UserId: userId, RestaurantId: restaurantId });
+    return res.status(201).json({ message: "Restaurant followed successfully." });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred while following the restaurant.", error: error.message });
+  }
+});
+
+//remove a follower by restaurant id
+router.delete("/:restaurantId/unfollow", autheticateUser, async (req, res) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  const userId = parseInt(req.session.userId, 10); // Get user ID from the session
+
+  try {
+    // Check if the follow relationship exists
+    const follow = await RestaurantFollow.findOne({
+      where: { UserId: userId, RestaurantId: restaurantId },
+    });
+
+    if (!follow) {
+      return res.status(404).json({ message: "Follow not found for this restaurant." });
+    }
+
+    // Remove the follow relationship
+    await follow.destroy();
+    return res.status(200).json({ message: "Unfollowed restaurant successfully." });
+  } catch (error) {
+    return res.status(500).json({
+      message: "An error occurred while unfollowing the restaurant.",
+      error: error.message,
+    });
+  }
+});
+
+
+//get number of followers for a restaurant
+router.get("/:restaurantId/follows/count", async (req, res) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+
+  try {
+    // Check if the restaurant exists
+    const restaurant = await Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found." });
+    }
+
+    // Count the number of followers for the restaurant
+    const followCount = await RestaurantFollow.count({
+      where: { RestaurantId: restaurantId },
+    });
+
+    return res.status(200).json({ restaurantId, followCount });
+  } catch (error) {
+    return res.status(500).json({
+      message: "An error occurred while counting followers for the restaurant.",
+      error: error.message,
+    });
+  }})
+
+//get all of a users followed restaurants by user Id
+router.get("/follows", autheticateUser, async (req, res) => {
+  const userId = parseInt(req.session.userId, 10); // Get user ID from session
+
+  try {
+    // Find all restaurants followed by the user
+    const followedRestaurants = await RestaurantFollow.findAll({
+      where: { UserId: userId },
+      include: [
+        {
+          model: Restaurant,
+        },
+      ],
+    });
+
+    return res.status(200).json({ followedRestaurants });
+  } catch (error) {
+    return res.status(500).json({
+      message: "An error occurred while fetching followed restaurants.",
+      error: error.message,
+    });
+  }
+});
+
+
+
 
 // fetch to google map api for the address's lat and lng by axios
 async function fetchRestaurantLatLng(address) {
@@ -232,5 +342,6 @@ router.get("/", async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
