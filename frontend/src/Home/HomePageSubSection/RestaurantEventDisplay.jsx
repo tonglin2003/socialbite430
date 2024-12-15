@@ -1,14 +1,19 @@
-import React, { useContext, useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom/dist/umd/react-router-dom.development';
-// import PostModal from '../../Component/ModalWindow/ModalWindow';
 import { Outlet } from 'react-router-dom/dist/umd/react-router-dom.development';
 
 const RestaurantEventDisplay = () => {
   const data = useLoaderData();
 
-  // to organize the data to fit inside the mansory layout
+  // Check if data is an array
+  if (!Array.isArray(data)) {
+    console.error("Expected data to be an array, but received:", data);
+    return <div>No data available</div>;  // Return a fallback UI when data is invalid
+  }
+
+  // to organize the data to fit inside the masonry layout
   const columns = [[], [], [], []];
   data.forEach((restaurant, index) => {
     columns[index % 4].push(restaurant);
@@ -27,7 +32,7 @@ const RestaurantEventDisplay = () => {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 px-24 pb-24 gap-2">
-  {columns.map((column, colIndex) => (
+      {columns.map((column, colIndex) => (
         <div key={colIndex} className="grid gap-2">
           {column.map((restaurantPost, index) => (
             <Link
@@ -45,10 +50,10 @@ const RestaurantEventDisplay = () => {
                   />
                 )}
                 <div className={`p-4 flex-grow border border-gray-300  ${restaurantPost.postImg? "rounded-b-lg" : "rounded-lg"}`}>
-                  <div style={{fontFamily: "Verdana"}}>{restaurantPost.postTitle}</div>
-                  <div className='flex flex-row mt-2'>
-                    <img src={restaurantPost.Restaurant.profileImage} className='rounded-full w-7 h-7 object-cover mr-1'/>
-                    <p className='text-xs my-auto'>
+                  <div style={{ fontFamily: "Verdana" }}>{restaurantPost.postTitle}</div>
+                  <div className="flex flex-row mt-2">
+                    <img src={restaurantPost.Restaurant.profileImage} className="rounded-full w-7 h-7 object-cover mr-1" />
+                    <p className="text-xs my-auto">
                       {restaurantPost.Restaurant.restaurantName}
                     </p>
                   </div>
@@ -56,14 +61,12 @@ const RestaurantEventDisplay = () => {
               </div>
             </Link>
           ))}
+        </div>
+      ))}
+      <Outlet />
     </div>
-  ))}
-  <Outlet/>
-</div>
-
-
-
   );
 };
 
 export default RestaurantEventDisplay;
+

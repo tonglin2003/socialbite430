@@ -1,0 +1,84 @@
+.aboutap {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Dosis", sans-serif;
+}
+
+.about-app {
+  height: 100vh;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-app .main-about img {
+  width: 580px;
+  max-width: 100%;
+  height: auto;
+  padding: 0 10px;
+}
+
+.all-text {
+  width: 600px;
+  max-width: 100%;
+  padding: 0 10px;
+}
+
+.main-about {
+  width: 1290px;
+  max-width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.all-text h4 {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  color: #777777;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.all-text h1 {
+  font-size: 50px;
+  color: #111111;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.all-text p {
+  font-family: "Roboto", sans-serif;
+  line-height: 30px;
+  color: #777777;
+  margin-bottom: 15px;
+}
+
+.btn-about button {
+  background: white;
+  padding: 20px 32px;
+  font-weight: bold;
+  color: #111111;
+  border: none;
+  outline: none;
+  box-shadow: 0 16px 32px 0 rgb(0 0 0 / 6%);
+  margin-right: 20px;
+}
+
+.btn-about button:hover {
+  background-color: lightcoral;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btn-about .btn2 {
+  background: #111111;
+  color: white;
+}

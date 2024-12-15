@@ -9,8 +9,8 @@ import {
   export async function action({ request, params }) {
     let formData = await request.formData();
     let postData = Object.fromEntries(formData);
-    console.log(postData);
-    console.log(params.restaurantId)
+     
+    console.log(params.restaurantId, "13 no line")
     try {
       // /api/restaurants/1/posts
       const response = await fetch(

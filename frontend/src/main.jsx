@@ -10,7 +10,6 @@ import AuthProvider from "./Contexts/AuthContext";
 import ProtectedRoute from "./UserAuthentication/ProtectedRoute";
 import ShareLocationRequired from "./UserAuthentication/ShareLocationRequired";
 
-
 // ----- home page components ----- ///
 import RestaurantDisplay from "./Home/HomePageSubSection/RestaurantDisplay";
 import RestaurantEventDisplay from "./Home/HomePageSubSection/RestaurantEventDisplay";
@@ -40,8 +39,6 @@ import EditRestaurant, {
 
 // Restaurant page
 import RestaurantPage from "./RestaurantPage/RestaurantPage";
-
-
 
 import DeleteRestaurant, {
   deleteAction,
@@ -74,12 +71,16 @@ import RestaurantReviews, {
   reviewsLoader,
 } from "./RestaurantPage/RestaurantReviews/RestaurantReviews";
 
+// Micheleneous Pages
+import AboutApp from "./AboutApp/AboutApp";
+import FAQ from "./FAQ/FAQ";
+import Contact from "./Contact/Contact";
 
 // map container
 // import MapContainer from "./RestaurantPage/RestaurantMap/RestaurantMap";
 
 import { restaurantByIdLoader } from "./Loader/loadRestaurants";
-
+import Menu from "./RestaurantPage/Menu/Menu"; 
 
 const router = createBrowserRouter([
   {
@@ -108,13 +109,12 @@ const router = createBrowserRouter([
             path: "/explore",
             element: <RestaurantEventDisplay />,
             loader: allEventsLoader,
-            children:
-            [
+            children: [
               {
                 path: "/explore/:postId",
-                element: <PostModal/>
-              }
-            ]
+                element: <PostModal />,
+              },
+            ],
           },
           {
             path: "/nearby_restaurant_post",
@@ -145,6 +145,19 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
+      {
+        path: "/aboutapp",
+        element: <AboutApp />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+
       {
         path: "/user/:id/settings",
         element: <User />,
@@ -190,6 +203,10 @@ const router = createBrowserRouter([
         loader: postLoader,
         element: <RestaurantPage />,
         children: [
+          {
+            path: "/restaurant/:restaurantId/menu",
+            element: <Menu />,
+          },
           {
             path: "/restaurant/:restaurantId",
             loader: postLoader,
