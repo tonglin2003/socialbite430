@@ -84,6 +84,10 @@ import Menu from "./RestaurantPage/Menu/Menu";
 import UsersRestaurant from "./UserSettings/UsersRestaurant/UsersRestaurant";
 import UsersLikedPost from "./UserSettings/UsersLikedPost/UsersLikedPost";
 
+// tag system
+import Tags, { loadTag } from "./UserSettings/Tags/Tags";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -182,6 +186,11 @@ const router = createBrowserRouter([
             element: <Delete />,
             action: deleteUserAction,
           },
+          {
+            path: "/user/:id/settings/tags",
+            element: <Tags />,
+            loader: loadTag,
+          }
         ],
       },
       {
@@ -245,6 +254,10 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         action: addPostAction,
+      },
+      {
+        path: "/user/settings/tags",
+        element: <Tags />,
       },
       {
         path: "restaurant_post/delete/:postId",

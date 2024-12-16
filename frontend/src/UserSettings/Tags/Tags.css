@@ -1,0 +1,98 @@
+.tags {
+  width: 60%;
+  margin-left: 27%;
+  padding-top: 15%;
+}
+
+.tags-section {
+  /* width: 50vw; */
+  /* width: 600px; */
+  padding-top: 120px;
+  width: 400px;
+  margin-left: 125px;
+
+  height: 100%;
+}
+
+.tags-box {
+  background: #ffffff;
+
+  height: auto;
+  box-shadow: 2px 3px 5px rgb(240, 240, 240);
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px 0px;
+  position: relative;
+}
+
+.tags-section h3 {
+  font-size: 28px;
+  font-weight: 400;
+  color: rgb(53, 52, 52);
+}
+
+.search-input {
+  padding: 14px;
+  width: 100%;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 20px;
+  outline: none;
+}
+
+.tags-suggestion-box {
+  width: calc(100% - 40px);
+  padding: 10px;
+  border: 1px solid rgb(240, 240, 240);
+  position: absolute;
+  top: 8.5rem;
+  left: 20px;
+  right: 20px;
+  border-radius: 8px;
+  background: white;
+  z-index: 10;
+}
+
+.tags-suggestion-box p {
+  color: rgb(53, 52, 52);
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.tags-suggestion-box p:hover {
+  background: rgb(231, 231, 231);
+  border-radius: 5px;
+}
+
+.selected-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.selected-tag {
+  background: #e7e7e7;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.delete-button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.delete-button:hover {
+  background: rgb(194, 194, 194);
+}
+

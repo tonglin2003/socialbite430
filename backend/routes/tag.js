@@ -169,15 +169,20 @@ router.get("/:postId", async(req, res)=>{
 })
 
 
-// get all tags in the database, so we can let users to know what tags we have
-router.get("/", async(req, res)=>{
-    try{
+// Get all tags in the database, so we can let users know what tags we have
+router.get("/", async (req, res) => {
+    try {
         const tags = await Tag.findAll();
         return res.status(200).json(tags);
-
-    } catch(error){
-        return res.status(500).json({message: "An error occured when fetching for tags"})
+    } catch (error) {
+        console.error("Error fetching tags:", error); // Log the full error to the server console
+        return res.status(500).json({
+            message: "An error occurred when fetching tags",
+            error: error.message, // Include a readable error message in the response
+            stack: error.stack,  // Optionally include the stack trace (not recommended for production)
+        });
     }
 });
+
 
 module.exports = router;

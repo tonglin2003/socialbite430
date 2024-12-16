@@ -16,14 +16,19 @@ export default function Home() {
     setActiveTab(index);
   };
 
+  let hideTimeout; // To store the timeout reference
+
   const handleMouseEnter = () => {
+    clearTimeout(hideTimeout); // Cancel the hide timeout if it exists
     const element = document.getElementById("restaurant_subNav");
     element.classList.remove("hidden");
   };
-
+  
   const handleMouseLeave = () => {
-    const element = document.getElementById("restaurant_subNav");
-    element.classList.add("hidden");
+    hideTimeout = setTimeout(() => {
+      const element = document.getElementById("restaurant_subNav");
+      element.classList.add("hidden");
+    }, 200);
   };
 
   const handleMouseEnterPost = () => {
