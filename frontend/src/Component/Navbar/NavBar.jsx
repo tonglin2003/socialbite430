@@ -132,7 +132,7 @@ export default function NavBar() {
                       to={`/user/${currentUser.id}/followed-restaurants`}
                       className="dark:text-white flex flex-row gap-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      My restaurants
+                      Followed Restaurants
                     </Link>
                     <Link
                       to={`/user/${currentUser.id}/liked-posts`}
