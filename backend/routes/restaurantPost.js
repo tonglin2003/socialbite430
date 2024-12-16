@@ -375,7 +375,7 @@ router.get("/user/interested_post", autheticateUser, async (req, res) => {
           include: [
               {
                   model: Post,
-                  attributes: ["id", "post_title", "post_content"], 
+                  attributes: ["id", "postTitle", "postContent", "postImg"], 
                   include: [
                       {
                           model: Restaurant,
