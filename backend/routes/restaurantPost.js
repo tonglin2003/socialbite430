@@ -354,59 +354,52 @@ router.get("/:postId/comment", async(req, res)=>{
 });
 
 // get all post that are associated with user's interest
-router.get("/user/interested_post", autheticateUser,async (req, res) => {
-    try {
-        // Get all user's interested tags
-        const userInterestedTags = await UserTag.findAll({ where: { UserId: parseInt(req.session.userId,10) } });
-        const userInterestedTagId = userInterestedTags.map((element) => { return element.TagId });
+router.get("/user/interested_post", autheticateUser, async (req, res) => {
+  try {
+      // Get all user's interested tags
+      const userInterestedTags = await UserTag.findAll({ where: { UserId: parseInt(req.session.userId, 10) } });
+      const userInterestedTagId = userInterestedTags.map((element) => element.TagId);
 
-        // If not interested in any tag, return 404
-        if (userInterestedTagId.length === 0) {
-            return res.status(404).json({ message: "No Tags Interested" });
-        }
+      // If not interested in any tag, return 404
+      if (userInterestedTagId.length === 0) {
+          return res.status(404).json({ message: "No Tags Interested" });
+      }
 
-        // Look for Post that user is interested in based on the userInterestedTags
-        const userInterestedPosts = await PostTag.findAll({
-            where: {
-                TagId: {
-                    [Op.in]: userInterestedTagId
-                }
-            },
-            include: 
-            [{
-                model: User,
-                attributes: ["username"]
-            },
-            {
-                model: Restaurant,
-                attributes: ["restaurantName", "profileImage", "id"]
-            }
-        ],
-        });
-        const userInterestedPostsId = userInterestedPosts.map((element) => { return element.PostId });
+      // Look for Post that user is interested in based on the userInterestedTags
+      const userInterestedPosts = await PostTag.findAll({
+          where: {
+              TagId: {
+                  [Op.in]: userInterestedTagId,
+              },
+          },
+          include: [
+              {
+                  model: Post,
+                  attributes: ["id", "post_title", "post_content"], 
+                  include: [
+                      {
+                          model: Restaurant,
+                          attributes: ["restaurantName", "profileImage", "id"],
+                      },
+                  ],
+              },
+          ],
+      });
 
-        // Use the PostId to find the posts inside the "post" table along with their associated tags
-        const posts = await Post.findAll({
-            where: {
-                id: {
-                    [Op.in]: userInterestedPostsId
-                }
-            },
-            include: {
-                model: Restaurant,
-                attributes: ["restaurantName", "profileImage", "id"],
-              }
-        });
+      const posts = userInterestedPosts.map((item) => item.Post);
 
-        if (posts.length === 0) {
-            return res.status(404).json({ message: "No Posts Interested" });
-        } else {
-            return res.status(200).json(posts);
-        }
-    } catch (error) {
-        return res.status(500).json({ message: "An error occurred when fetching for restaurants", error: error.stack, errorMessage: error.message });
-    }
+      if (posts.length === 0) {
+          return res.status(404).json({ message: "No Posts Interested" });
+      } else {
+          return res.status(200).json(posts);
+      }
+  } catch (error) {
+      return res
+          .status(500)
+          .json({ message: "An error occurred when fetching for restaurants", error: error.stack, errorMessage: error.message });
+  }
 });
+
 
 // get all post nearby restaurant post, if user allowed share location
 router.get("/user/nearby_post/:radiusKm", userAllowPosition, async(req,res)=>{
