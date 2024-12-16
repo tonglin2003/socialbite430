@@ -25,8 +25,8 @@ export async function userSettingsLoader({ params }) {
 export default function UserSettings() {
   const { user } = useLoaderData();
   return (
-    <div className="body">
-      <div className="container">
+    <div className="body overflow-x-hidden">
+      <div className="container ">
         <div className="leftbox">
           <nav className="nav">
             <Link to={`/user/${user.UserId}/settings/account`} className="tab">

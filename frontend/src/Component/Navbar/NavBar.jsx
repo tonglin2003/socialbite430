@@ -21,7 +21,7 @@ export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const urlLastItem = location.pathname.split("/").pop();
-  
+
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
@@ -43,11 +43,10 @@ export default function NavBar() {
     );
   }
 
-
   // for other pages, return the navbar and the footer
   return (
     <>
-      <div className="entire-page">
+      <div className="entire-page ">
         <div className="headerBar">
           <Link to="/" className="flex h-full">
             <img
@@ -57,7 +56,7 @@ export default function NavBar() {
             />
           </Link>
 
-          <div className="right">
+          <div className="right ">
             <div className="nav-menu">
               <ul className="nav-menu-list">
                 <li className="nav-menu-item z-5">
@@ -91,7 +90,11 @@ export default function NavBar() {
               label={
                 <Avatar
                   alt="User settings"
-                  img={ currentUser ? currentUser.profileImage : "/src/assets/default-avatar.webp"}
+                  img={
+                    currentUser
+                      ? currentUser.profileImage
+                      : "/src/assets/default-avatar.webp"
+                  }
                   rounded
                 />
               }
@@ -112,14 +115,17 @@ export default function NavBar() {
                         />
                       </Link>
                     </div>
-                    <span className="block text-sm">
+                    <span className="block text-sm dark:text-white">
                       {currentUser.username}
                       {/* {currentUser.id} */}
                     </span>
-                    <span className="block truncate text-sm font-medium">
+                    <span className="block truncate text-sm font-medium dark:text-white">
                       {currentUser.email}
                     </span>
-                    <Link to={`/user/${currentUser.id}`} className="block flex flex-row gap-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    <Link
+                      to={`/user/${currentUser.id}`}
+                      className="dark:text-white flex flex-row gap-1 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
                       My Profile
                     </Link>
                   </div>
@@ -129,9 +135,7 @@ export default function NavBar() {
                     <span className="block truncate text-sm font-medium">
                       User@user.com
                     </span>
-                    <span className="block text-sm">
-                      Profile
-                    </span>
+                    <span className="block text-sm">Profile</span>
                   </div>
                 )}
               </Dropdown.Header>

@@ -1,7 +1,7 @@
 .body {
   /* background-image: linear-gradient(79deg, #f14037, #eb694e 48%, #ed958f); */
   background-color: rgb(255, 241, 241);
-  overflow-x: hidden;
+  overflow-x: hidden; 
 }
 
 .container {

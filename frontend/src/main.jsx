@@ -80,6 +80,7 @@ import Contact from "./Contact/Contact";
 // import MapContainer from "./RestaurantPage/RestaurantMap/RestaurantMap";
 
 import { restaurantByIdLoader } from "./Loader/loadRestaurants";
+import Menu from "./RestaurantPage/Menu/Menu"; 
 
 const router = createBrowserRouter([
   {
@@ -201,6 +202,10 @@ const router = createBrowserRouter([
         loader: postLoader,
         element: <RestaurantPage />,
         children: [
+          {
+            path: "/restaurant/:restaurantId/menu",
+            element: <Menu />,
+          },
           {
             path: "/restaurant/:restaurantId",
             loader: postLoader,
