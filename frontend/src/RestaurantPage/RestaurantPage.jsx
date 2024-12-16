@@ -13,7 +13,8 @@ import {
   Link,
 } from "react-router-dom/dist/umd/react-router-dom.development";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
+import RestaurantFollow from "./RestaurantFollowBtn/RestaurantFollowBtn";
 
 export default function RestaurantPage() {
   const { restaurantId } = useParams();
@@ -106,7 +107,10 @@ export default function RestaurantPage() {
               ></img>
 
               <ul className="list-unstyled components flex flex-col">
-                <p className="res-name">{restaurant.restaurantName}</p> 
+                <p className="res-name">{restaurant.restaurantName}</p>
+                {/* {Follow section} */}
+                <RestaurantFollow resId={restaurantId || "1"} />
+                {/* {Follow Section End} */}
                 <p className="flex flex-row gap-1">
                   Rating: {...getStars(average)}
                 </p>

@@ -80,7 +80,9 @@ import Contact from "./Contact/Contact";
 // import MapContainer from "./RestaurantPage/RestaurantMap/RestaurantMap";
 
 import { restaurantByIdLoader } from "./Loader/loadRestaurants";
-import Menu from "./RestaurantPage/Menu/Menu"; 
+import Menu from "./RestaurantPage/Menu/Menu";
+import UsersRestaurant from "./UserSettings/UsersRestaurant/UsersRestaurant";
+import UsersLikedPost from "./UserSettings/UsersLikedPost/UsersLikedPost";
 
 const router = createBrowserRouter([
   {
@@ -156,6 +158,14 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/user/:id/followed-restaurants",
+        element: <UsersRestaurant />,
+      },
+      {
+        path: "/user/:id/liked-posts",
+        element: <UsersLikedPost />,
       },
       {
         path: "/user/:id/settings",
